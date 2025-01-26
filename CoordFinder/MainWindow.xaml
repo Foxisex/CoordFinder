@@ -1,0 +1,117 @@
+﻿<Window x:Class="CoordFinder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CoordFinder"
+        mc:Ignorable="d"
+        Title="CoordFinder" Height="350" Width="500">
+
+    <Grid Margin="10,10,10,0" Height="414" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Поле ввода адреса -->
+        <TextBox x:Name="AddressInput" Grid.Row="0" Margin="0,0,0,10" Padding="5">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border BorderBrush="Gray" BorderThickness="1">
+                                    <Grid>
+                                        <!-- Подсказка -->
+                                        <TextBlock x:Name="Placeholder" 
+                                                       Text="Введите адрес..." 
+                                                       Foreground="Gray"
+                                                       Visibility="Collapsed"
+                                                       Margin="5"/>
+                                        <ScrollViewer x:Name="PART_ContentHost"/>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="Text" Value="" />
+                                            <!-- Если текст пуст -->
+                                            <Condition Property="IsFocused" Value="False" />
+                                            <!-- И поле не в фокусе -->
+                                        </MultiTrigger.Conditions>
+                                        <Setter TargetName="Placeholder" Property="Visibility" Value="Visible"/>
+                                    </MultiTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <!-- Кнопка поиска -->
+        <Button x:Name="SearchButton" Grid.Row="1" 
+                    Content="Найти координаты"
+                    Padding="10 5" Margin="0,0,0,10"
+                    Click="SearchButton_Click"/>
+
+        <Grid Grid.Row="2" Margin="0,0,0,175" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Общая граница для всей таблицы -->
+            <Border Grid.RowSpan="3" Grid.ColumnSpan="4"
+                        BorderBrush="LightGray" BorderThickness="1"
+                        CornerRadius="3" Background="WhiteSmoke"/>
+
+            <!-- Горизонтальный разделитель строк -->
+            <Border Grid.Row="1" Grid.ColumnSpan="4" Height="1"  
+                        Background="LightGray" VerticalAlignment="Bottom"/>
+
+            <!-- Заголовки -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="5" 
+                           TextAlignment="Center" FontWeight="SemiBold"
+                           Text="Широта:" Foreground="DimGray"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="5" 
+                           TextAlignment="Center" FontWeight="SemiBold"
+                           Text="Долгота:" Foreground="DimGray"/>
+
+            <!-- Значения координат -->
+            <TextBlock Grid.Row="1" Grid.Column="0" x:Name="latResult" 
+                           Margin="5 5 5 15" TextAlignment="Center" Text="-"/>
+
+
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="longResult" 
+                           Margin="5 5 5 15" TextAlignment="Center" Text="-"/>
+
+            <!-- Кнопки -->
+            <Button Grid.Row="1" Grid.Column="2" 
+                        Content="📋" Margin="0 0 2 10" Padding="5" 
+                        Click="CopyYandex_Click" BorderBrush="LightGray"
+                        ToolTip="Копировать координаты" Background="WhiteSmoke"/>
+
+            <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="0 20 0 10"
+                           Text="Открыть в браузере&#x0a;на карте" Foreground="DimGray" 
+                           TextAlignment="Center" VerticalAlignment="Center"/>
+
+            <Button Grid.Row="2" Grid.Column="2" Margin="0 20 2 10" 
+                        Content="Яндекс" MinWidth="60" Padding="5" BorderBrush="LightGray"
+                        Click="OpenUrlYandexButton_Click" Background="WhiteSmoke"/>
+
+            <Button Grid.Row="2" Grid.Column="3" Margin="0 20 2 10" 
+                        Content="2ГИС" MinWidth="60" Padding="5" BorderBrush="LightGray"
+                        Click="OpenUrlGisButton_Click" Background="WhiteSmoke"/>
+        </Grid>
+    </Grid>
+
+</Window>
