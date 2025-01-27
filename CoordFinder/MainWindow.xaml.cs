@@ -65,8 +65,6 @@ namespace CoordFinder
                 if (pos != null)
                 {
                     var parts = pos.Split(' ');
-                    Console.WriteLine(pos);
-                    Console.WriteLine(parts.Length);
                     if (parts.Length == 2)
                     {
                         longResult.Text = parts[0];
