@@ -5,7 +5,7 @@
   <li>WPF (.NETFramework v4.7.2)</li>
   <li>Yandex Geocoder Api</li>
   <li>Newtonsoft.Json</li>
-  <li>VS Studio 2022</li>
+  <li>VS 2022</li>
 </ul>
 <H2>🌍Основной функционал</H2>
 <img src="https://github.com/Foxisex/CoordFinder/blob/master/images/GUI.png?raw=true"/>
